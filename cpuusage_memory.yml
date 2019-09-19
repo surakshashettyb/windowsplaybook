@@ -1,0 +1,18 @@
+---
+- hosts: win
+  tasks:
+  - name: CPU usage
+    win_command: wmic cpu get loadpercentage
+    register: cpu_results
+
+  - name: Memory
+    win_command: wmic OS get FreePhysicalMemory /Value
+    register: mem_results
+
+  - name: Cpu and Memory info
+    vars:
+     msg: |
+      CPU: {{ cpu_results.stdout }}
+      Memory: {{ mem_results.stdout }}
+    debug:
+     msg: "{{ msg.split(\r) }}"
