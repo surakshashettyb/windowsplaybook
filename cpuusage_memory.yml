@@ -1,5 +1,5 @@
 ---
-- hosts: 10.0.0.10
+- hosts: all
   tasks:
   - name: CPU usage
     win_command: wmic cpu get loadpercentage
